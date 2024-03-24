@@ -1,9 +1,9 @@
 import fs from "node:fs";
 import assert from "node:assert";
 import path from "node:path";
+import os from "node:os"
 
 const data = fs.readFileSync(path.resolve(import.meta.dirname, "./data"), "utf-8");
-const eol = /\r?\n/;
 
 function isNumber(ch) {
   return !Number.isNaN(+ch);
@@ -31,7 +31,7 @@ function testIsNumber() {
 function solvePart1(data) {
   const calibrationValues = [];
 
-  data.split(eol).forEach((line) => {
+  data.split(os.EOL).forEach((line) => {
     const first = line.split("").find((ch) => isNumber(ch));
     const last = line.split("").findLast((ch) => isNumber(ch));
 
@@ -57,7 +57,7 @@ function solvePart2(data) {
     nine: "9",
   };
 
-  data.split(eol).forEach((line) => {
+  data.split(os.EOL).forEach((line) => {
     const processed = line
       .split("")
       .reduce((acc, curr) => {
