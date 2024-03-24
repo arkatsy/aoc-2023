@@ -1,7 +1,8 @@
 import fs from "node:fs";
-import assert, { match } from "node:assert";
+import assert from "node:assert";
+import path from "node:path";
 
-const data = fs.readFileSync("./data", "utf-8");
+const data = fs.readFileSync(path.resolve(import.meta.dirname, "./data"), "utf-8");
 const eol = /\r?\n/;
 
 function isNumber(ch) {
@@ -55,8 +56,6 @@ function solvePart2(data) {
     eight: "8",
     nine: "9",
   };
-
-  let d = [];
 
   data.split(eol).forEach((line) => {
     const processed = line
