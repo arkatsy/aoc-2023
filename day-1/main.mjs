@@ -1,7 +1,8 @@
 import fs from "node:fs";
 import assert from "node:assert";
 import path from "node:path";
-import os from "node:os"
+
+const eol = /\r?\n|\r|\n/g;
 
 const data = fs.readFileSync(path.resolve(import.meta.dirname, "./data"), "utf-8");
 
@@ -20,18 +21,14 @@ function testIsNumber() {
   ]);
 
   samples.forEach((sample) => {
-    assert.equal(
-      isNumber(sample.input),
-      sample.expected,
-      `isNumber(${sample.input}) should be ${sample.expected}`
-    );
+    assert.equal(isNumber(sample.input), sample.expected, `isNumber(${sample.input}) should be ${sample.expected}`);
   });
 }
 
 function solvePart1(data) {
   const calibrationValues = [];
 
-  data.split(os.EOL).forEach((line) => {
+  data.split(eol).forEach((line) => {
     const first = line.split("").find((ch) => isNumber(ch));
     const last = line.split("").findLast((ch) => isNumber(ch));
 
@@ -57,7 +54,7 @@ function solvePart2(data) {
     nine: "9",
   };
 
-  data.split(os.EOL).forEach((line) => {
+  data.split(eol).forEach((line) => {
     const processed = line
       .split("")
       .reduce((acc, curr) => {

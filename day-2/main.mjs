@@ -1,11 +1,12 @@
 import path from "node:path";
-import os from "node:os";
 import fs from "node:fs";
+
+const eol = /\r?\n|\r|\n/g;
 
 const input = fs.readFileSync(path.resolve(import.meta.dirname, "./data"), "utf-8");
 
 // Parse the data
-const games = input.split(os.EOL);
+const games = input.split(eol);
 
 const gameSets = games.map((game) => {
   const base = game.split(":");
